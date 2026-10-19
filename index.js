@@ -51,6 +51,28 @@ app.get('/update-cobj', (req, res) => {
 
 // * Code for Route 3 goes here
 
+app.post('/update-cobj', async (req, res) => {
+  const newCard = {
+    properties: {
+      name: req.body.name,
+      set_code: req.body.set_code,
+      rarity: req.body.rarity,
+    },
+  };
+
+  try {
+    await axios.post(
+      `https://api.hubapi.com/crm/v3/objects/${OBJECT_TYPE}`,
+      newCard,
+      { headers },
+    );
+    res.redirect('/');
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+    res.status(500).send('Error creating card');
+  }
+});
+
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 
 
