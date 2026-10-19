@@ -21,6 +21,22 @@ const headers = {
 
 // * Code for Route 1 goes here
 
+app.get('/', async (req, res) => {
+  const url = `https://api.hubapi.com/crm/v3/objects/${OBJECT_TYPE}?properties=name,set_code,rarity`;
+
+  try {
+    const resp = await axios.get(url, { headers });
+    const cards = resp.data.results;
+    res.render('homepage', {
+      title: 'Cards | Integrating With HubSpot I Practicum',
+      cards,
+    });
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+    res.status(500).send('Error fetching cards');
+  }
+});
+
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here

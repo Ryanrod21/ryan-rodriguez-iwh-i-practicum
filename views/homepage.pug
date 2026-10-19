@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    a(href="/update-cobj") Add to this table
+    h1 One Piece Cards
+    table
+      thead
+        tr
+          th Name
+          th Set Code
+          th Rarity
+      tbody
+        each card in cards
+          tr
+            td= card.properties.name
+            td= card.properties.set_code
+            td= card.properties.rarity
